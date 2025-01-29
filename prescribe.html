@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prescribe</title>
+    <meta charset="utf-8">
+    <style>
+        label {
+            display: inline-block;
+            margin: 5px 0;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        body{
+            background-image: url('images/Blue\ Background\ GIF\ by\ Maytronics.gif');
+            background-size: cover;
+            background-position: center;
+            padding: 0.2em;
+            margin: 0;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        .main{
+        position: absolute;      
+        top: 15%;                 
+        left: 38%; 
+        }
+        .submit{
+      width: 120px;                    
+      height: 30px;                                    
+      border-radius: 150px; 
+      background-color: #00bfbf;                  
+      font-size: 18px;                 
+      font-weight: bold;               
+      box-shadow: 0 8px 16px rgba(128, 128, 128, 0.5); 
+      cursor: pointer;                 
+      transition: all 0.3s ease; 
+      color: #006e6e;
+      text-decoration: none; 
+      transition: all 0.3s ease; 
+      position: absolute;      
+      top: 87%;                 
+      left: 46%; 
+        }
+     .submit:hover{
+            color: #006e6e;
+            transform: scale(1.1);
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent the form from submitting 
+
+            var patientName = document.querySelector('input[type="text"]').value;
+            var patientAge = document.querySelector('input[type="number"]').value;
+            var gender = document.querySelector('input[name="gender"]:checked').value;
+
+            var selectedMedications = [];
+            var medicationCheckboxes = document.querySelectorAll('input[name="Medication"]:checked');
+            medicationCheckboxes.forEach(function(checkbox) {
+                selectedMedications.push(checkbox.value);
+            });
+
+            if (selectedMedications.length === 0) {
+                alert("Please select at least one medication.");
+                return;
+            }
+
+            var prescriptionSummary = `
+                <h2>Prescription Summary</h2>
+                <p><strong>Patient's Name:</strong> ${patientName}</p>
+                <p><strong>Patient's Age:</strong> ${patientAge}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+                <p><strong>Prescribed Medications:</strong> ${selectedMedications.join(', ')}</p>
+            `;
+            
+            document.getElementById("prescriptionSummary").innerHTML = prescriptionSummary;
+
+            document.getElementById("Prescribe-form").reset();
+        }
+
+     
+        window.onload = function() {
+            document.getElementById("Prescribe-form").addEventListener("submit", handleSubmit);
+        };
+    </script>
+</head>
+<body>
+    <div class="main">
+    <h1>Patient's Medications</h1>
+
+    <form id="Prescribe-form">
+        <label>Patient's Name:</label><input type="text" required><br>
+        <label>Patient's Age:</label><input type="number" required><br>
+        <label>Gender: </label>
+        <label>Female <input type="radio" name="gender" value="female" checked></label>
+        <label>Male <input type="radio" name="gender" value="male"></label><br>
+        <label>Medication: </label><br>
+        <ul>
+            <li><label><input type="checkbox" name="Medication" value="Paracetamol"> Paracetamol (Pain relief, fever reduction)</label></li>
+            <li><label><input type="checkbox" name="Medication" value="Ibuprofen"> Ibuprofen (Anti-inflammatory, pain relief)</label></li>
+            <li><label><input type="checkbox" name="Medication" value="Amoxicillin"> Amoxicillin (Antibiotic)</label></li>
+            <li><label><input type="checkbox" name="Medication" value="Metformin"> Metformin (Diabetes management)</label></li>
+            <li><label><input type="checkbox" name="Medication" value="Lisinopril"> Lisinopril (Blood pressure management)</label></li>
+            <li><label><input type="checkbox" name="Medication" value="Atorvastatin"> Atorvastatin (Cholesterol management)</label></li>
+            <li><label><input type="checkbox" name="Medication" value="Omeprazole"> Omeprazole (Acid reflux, heartburn)</label></li>
+            <li><label><input type="checkbox" name="Medication" value="Salbutamol"> Salbutamol (Asthma, bronchospasm relief)</label></li>
+            <li><label><input type="checkbox" name="Medication" value="Hydrochlorothiazide"> Hydrochlorothiazide (Diuretic, blood pressure management)</label></li>
+            <li><label><input type="checkbox" name="Medication" value="Cetirizine"> Cetirizine (Allergy relief)</label></li>
+        </ul>
+    </div>
+        <button type="submit" class="submit">Submit</button>
+    </form>
+
+    <div id="prescriptionSummary">
+       
+    </div>
+</body>
+</html>

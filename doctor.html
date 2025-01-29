@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Homepage</title>
+    <meta charset="utf-8">
+    <style>
+        table {
+            width: 75%;
+            height: 270px;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #B1F0F7;
+            color: #006e6e;
+            font-family: Arial;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        a {
+            text-decoration: none;
+        }
+        #sign {
+            color: rgb(120, 120, 120); 
+            text-decoration: none; 
+            border: 1px solid gray; 
+            border-radius: 150px; 
+            width: 100px; 
+            height: 50px; 
+            text-align: center; 
+            line-height: 50px; 
+            font-weight: bold; 
+            transition: all 0.3s ease; 
+            padding: 11px;
+        }
+
+        #sign:hover {
+            color: #006e6e;
+            transform: scale(1.1);
+            font-size: 18px;
+        }
+        .info{
+            font-family:"EB Garamond";
+        }
+        .header {
+            background-image: url('images/Blue\ Background\ GIF\ by\ Maytronics.gif');
+            background-size: cover;
+            background-position: center;
+            padding: 0.2em;
+            margin: 0;
+            justify-content: center;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        #doctorName{
+            color: #006e6e;
+        }
+        #doctorInfo{
+            list-style: none; 
+            padding: 0;
+            font-size: 20px;
+        }
+        .middle {
+            background-color: #fdfdf7;
+        }
+        #doctorInfo{
+            list-style: none; 
+            padding: 0;
+            font-size: 20px;
+        }
+        li{
+            position: relative;
+            left: 50px;
+            list-style: circle;
+        }
+        .Upcoming{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+        
+        window.onload = function() {
+            var doctorName = "John Doe"; 
+            document.getElementById("doctorName").textContent = "Welcome, Dr. " + doctorName;
+
+   
+            var confirmButtons = document.querySelectorAll('.confirm-btn');
+            confirmButtons.forEach(function(button) {
+                button.addEventListener('click', confirmAppointment);
+            });
+        }
+
+        function confirmAppointment(event) {
+            var row = event.target.closest('tr');
+            var statusCell = row.cells[6]; // Status is in the 7th column (index 6)
+            statusCell.textContent = "Confirmed"; // Change to "Confirmed"
+            event.target.remove(); // Remove the button after confirming an appointment
+        }
+
+        // optional 
+        function prescribeMedication(event) {
+           
+            alert("Redirecting to the prescription page for " + event.target.parentElement.parentElement.cells[0].textContent);
+        }
+        
+    </script>
+</head>
+<body>
+        <div class="header fade-in">
+            <a href="index.html" id="sign">Sign-out</a>
+            <header>
+                <h1 id="doctorName">Welcome, [Doctor Name]</h1>
+            </header>
+            <section>
+                <h2 class="info">Your Information</h2>
+                <ul id="doctorInfo">
+                    <li><strong>Full Name:</strong> John Doe</li>
+                    <li><strong>Email:</strong> john.doe@example.com</li>
+                    <li><strong>Phone:</strong> +123456789</li>
+                    <li><strong>Age:</strong> 30</li>
+                </ul>
+            </section>
+        </div>
+        <div class="middle fade-in">
+            <section id="appointment">
+                <h2 class="Upcoming">Upcoming Appointments</h2>
+                <!-- <table>
+                </table>-->
+        </div>
+</body>
+</html>
+
+            

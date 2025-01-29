@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log-in</title>
+    <meta charset="utf-8">
+    <style>
+         body{
+            background-image: url('images/Blue\ Background\ GIF\ by\ Maytronics.gif');
+            background-size: cover;
+            background-position: center;
+            padding: 0.2em;
+            margin: 0;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        #email{
+            width: 300px;               
+            padding: 10px 15px;        
+            border: 2px solid #006e6e39; 
+            border-radius: 25px;       
+            outline: none;             
+            font-size: 16px; 
+            box-shadow: 0 4px 8px #006e6e;
+            display: block;
+            position: absolute;  
+            top: 40%;          
+            left: 50%;             
+            transform: translate(-50%, -50%);
+        }
+        #email::placeholder {
+            font-style: italic;
+        }
+        #email:focus {
+            border-color: #00bfbf; 
+            box-shadow: 0 4px 12px rgba(0, 191, 191, 0.5); 
+        }
+        #p{
+            width: 300px;               
+            padding: 10px 15px;        
+            border: 2px solid #006e6e39; 
+            border-radius: 25px;       
+            outline: none;             
+            font-size: 16px; 
+            box-shadow: 0 4px 8px #006e6e;
+            display: block;
+            position: absolute;      
+            top: 50%;                 
+            left: 50%;                
+            transform: translate(-50%, -50%);
+        }
+        #p::placeholder {
+            font-style: italic;
+        }
+        #p:focus {
+            border-color: #00bfbf; 
+            box-shadow: 0 4px 12px rgba(0, 191, 191, 0.5); 
+        }
+        .tabs {
+          display: flex;
+          gap: 20px;
+          position: absolute;      
+          top: 30%;                 
+          left: 50%;                
+          transform: translate(-50%, -50%);
+    }
+
+    .tabs a {
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 500;
+      color: #ccc;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .tabs a.active {
+      color: #00796b; 
+      right: 50%;
+    }
+
+    .tabs a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -30%;
+      width: 170%;
+      height: 2px;
+      background-color: #00796b; 
+    }
+   #log-button{
+      width: 130px;                    
+      height: 30px;                                    
+      border-radius: 150px; 
+      background-color: #00bfbf;                  
+      font-size: 18px;                 
+      font-weight: bold;               
+      box-shadow: 0 8px 16px rgba(128, 128, 128, 0.5); 
+      cursor: pointer;                 
+      transition: all 0.3s ease; 
+      color: #006e6e;
+      text-decoration: none; 
+      border: 1px; 
+      transition: all 0.3s ease; 
+      position: absolute;      
+      top: 70%;                 
+      left: 46%; 
+        }
+    #log-button:hover{
+            color: #006e6e;
+            transform: scale(1.1);
+            font-size: 18px;
+        }
+        .role1{
+            position: absolute;      
+            top: 60%;                 
+            left: 45%; 
+            font-size: 25px;
+            text-shadow: 2px 2px 2px rgba(74, 74, 74, 0.5);
+        }
+        .role2{
+            position: absolute;      
+            top: 60%;                 
+            left: 52%; 
+            font-size: 25px;
+            text-shadow: 2px 2px 2px rgba(74, 74, 74, 0.5);
+
+        }
+        .roles{
+            position: absolute;      
+            top: 60%;                 
+            left: 41%; 
+            font-size: 25px;
+            text-shadow: 2px 2px 2px rgba(74, 74, 74, 0.5);
+
+
+        }
+    </style>
+    <script>
+        // إضافة وظيفة لمعالجة إرسال النموذج
+        function redirectToRolePage(event) {
+            event.preventDefault(); // منع الإرسال الافتراضي للنموذج
+            // الحصول على الدور المحدد
+            const role = document.querySelector('input[name="role"]:checked').value;
+            // التحقق من الدور وتحديد الصفحة المناسبة
+            if (role === "Doctor") {
+                window.location.href = "doctor.html"; // صفحة الطبيب
+            } else if (role === "Patient") {
+                window.location.href = "patient.html"; // صفحة المريض
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="tabs">
+        <a href="#" class="active">Login</a>
+        <a href="signup.html" style="color: #5d5d5d; left: 30%;">Sign up</a>
+      </div>
+
+    <form onsubmit="redirectToRolePage(event)">
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <input type="password" id="p" placeholder="Password" required>
+        <label class="roles">Role: </label>
+        <label class="role1"><input type="radio" name="role" value="Doctor" checked>Doctor</label>
+        <label class="role2"> <input type="radio" name="role" value="Patient">Patient</label><br>
+        <input type="submit" value="Log In" id="log-button">
+    </form>
+</body>
+</html>

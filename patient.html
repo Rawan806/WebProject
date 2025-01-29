@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Homepage</title>
+    <meta charset="utf-8">
+    <style>
+        table {
+            width: 75%;
+            height: 270px;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #B1F0F7;
+            color: #006e6e;
+            font-family: Arial;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .middle {
+            background-color: #fdfdf7;
+        }
+
+        .header {
+            background-image: url('images/Blue\ Background\ GIF\ by\ Maytronics.gif');
+            background-size: cover;
+            background-position: center;
+            padding: 0.2em;
+            margin: 0;
+            justify-content: center;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        #patientName {
+            color: #006e6e;
+        }
+
+        #sign {
+            color: rgb(120, 120, 120); 
+            text-decoration: none; 
+            border: 1px solid gray; 
+            border-radius: 150px; 
+            width: 100px; 
+            height: 50px; 
+            text-align: center; 
+            line-height: 50px; 
+            font-weight: bold; 
+            transition: all 0.3s ease; 
+            padding: 11px;
+        }
+
+        #sign:hover {
+            color: #006e6e;
+            transform: scale(1.1);
+            font-size: 18px;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.9s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #booking{
+            position:relative;
+            left:980px;
+            top: 55px;
+            display: inline;
+            background-color: #B1F0F7; 
+            color: #000000;
+            text-decoration: none; 
+            border: 1px; 
+            border-radius: 150px; 
+            width: 100px; 
+            height: 50px; 
+            text-align: center; 
+            line-height: 50px; 
+            font-weight: bold; 
+            transition: all 0.3s ease; 
+            padding: 11px;
+        }
+        #booking:hover{
+            color: #006e6e;
+            transform: scale(1.1);
+            font-size: 18px;
+        }
+        .info{
+            font-family:"EB Garamond";
+        }
+        #patientInfo{
+            list-style: none; 
+            padding: 0;
+            font-size: 20px;
+        }
+        li{
+            position: relative;
+            left: 50px;
+            list-style: circle;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.fade-in');
+
+            function handleScroll() {
+                elements.forEach((el) => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 50) {
+                        el.classList.add('visible');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // للتأكد من إظهار العناصر في البداية إذا كانت مرئية
+        });
+
+        function cancelAppointment(event) {
+            if (confirm("Are you sure you want to cancel this appointment?")) {
+                const row = event.target.parentElement.parentElement;
+                row.remove();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="header fade-in">
+        <a href="index.html" id="sign">Sign-out</a>
+        <header>
+            <h1 id="patientName">Welcome, John Doe</h1>
+        </header>
+        <section>
+            <h2 class="info">Your Information</h2>
+            <ul id="patientInfo">
+                <li><strong>Full Name:</strong> John Doe</li>
+                <li><strong>Email:</strong> john.doe@example.com</li>
+                <li><strong>Phone:</strong> +123456789</li>
+                <li><strong>Age:</strong> 30</li>
+            </ul>
+        </section>
+    </div>
+    <div class="middle fade-in">
+        <a href="booking.html" id="booking">Book an Appointment</a>
+        <section>
+            <h2>Your Appointments</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Doctor's Name</th>
+                        <th>Doctor's Photo</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="appointmentsTable">
+                    <tr>
+                        <td>2025-01-20</td>
+                        <td>10:00 AM</td>
+                        <td>Dr. John Heart</td>
+                        <td><img src="images/download (5).jpeg" alt="Doctor's Photo"></td>
+                        <td>Pending</td>
+                        <td><a href="#" onclick="cancelAppointment(event)">Cancel</a></td>
+                    </tr>
+                    <tr>
+                        <td>2025-01-22</td>
+                        <td>02:00 PM</td>
+                        <td>Dr. Lisa Brain</td>
+                        <td><img src="images/download (1).jpeg" alt="Doctor's Photo"></td>
+                        <td>Confirmed</td>
+                        <td><a href="#" onclick="cancelAppointment(event)">Cancel</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+</html>

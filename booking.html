@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book an Appointment</title>
+    <meta charset="utf-8">
+    <style>
+        #sign {
+            color: rgb(120, 120, 120); 
+            text-decoration: none; 
+            border: 1px solid gray; 
+            border-radius: 150px; 
+            width: 100px; 
+            height: 50px; 
+            text-align: center; 
+            line-height: 50px; 
+            font-weight: bold; 
+            transition: all 0.3s ease; 
+            padding: 11px;
+        }
+
+        #sign:hover {
+            color: #006e6e;
+            transform: scale(1.1);
+            font-size: 18px;
+        }
+        body{
+            background-image: url('images/Blue\ Background\ GIF\ by\ Maytronics.gif');
+            background-size: cover;
+            background-position: center;
+            padding: 0.2em;
+            margin: 0;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        .head{
+            text-align: center;
+            position: relative;
+            top: 55px;
+            color: #006e6e;
+            text-shadow:7px 9px 7px gray ;
+        }
+        #specialty-form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            top: 70px;
+        }
+        .select{
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 20px;
+            position: relative;
+            right: 39px;
+
+        }
+        .s1{
+            position: relative;
+            top: 2px;
+            right: 24px;
+            
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" id="sign">Sign-out</a>
+    <header>
+        <p></p>
+    </header>
+    <h1 class="head">Book an Appointment</h1>
+
+    <!-- First Form: Select Specialty -->
+    <form id="specialty-form">
+        <label class="select">Select Specialty:</label>
+        <div class="s1">
+                <select name="speciality" id="speciality" required>
+                    <option value="" disabled selected>Select a specialty</option>
+                    <!-- Specialties grouped under optgroup -->
+                    <optgroup label="Cardiology & Vascular Medicine">
+                        <option value="cardiology">Cardiology (Heart Specialist)</option>
+                        <option value="vascular-surgery">Vascular Surgery</option>
+                    </optgroup>
+                    <optgroup label="Neurology & Brain">
+                        <option value="neurology">Neurology (Brain and Nervous System)</option>
+                        <option value="neurosurgery">Neurosurgery</option>
+                    </optgroup>
+                    <optgroup label="Pediatrics">
+                        <option value="pediatrics">Pediatrics (Child Specialist)</option>
+                        <option value="pediatric-surgery">Pediatric Surgery</option>
+                    </optgroup>
+                    <optgroup label="Women's Health">
+                        <option value="gynecology">Gynecology (Women's Health)</option>
+                        <option value="obstetrics">Obstetrics (Pregnancy and Childbirth)</option>
+                    </optgroup>
+                    <optgroup label="Dermatology & Aesthetics">
+                        <option value="dermatology">Dermatology (Skin Specialist)</option>
+                        <option value="cosmetic-surgery">Cosmetic Surgery</option>
+                    </optgroup>
+                    <optgroup label="General Medicine & Surgery">
+                        <option value="general-medicine">General Medicine</option>
+                        <option value="general-surgery">General Surgery</option>
+                    </optgroup>
+                    <optgroup label="Other Specialties">
+                        <option value="psychiatry">Psychiatry (Mental Health)</option>
+                        <option value="radiology">Radiology (Imaging and Diagnostics)</option>
+                        <option value="oncology">Oncology (Cancer Specialist)</option>
+                        <option value="urology">Urology (Urinary Tract Specialist)</option>
+                        <option value="gastroenterology">Gastroenterology (Digestive System)</option>
+                        <option value="endocrinology">Endocrinology (Hormonal Specialist)</option>
+                        <option value="ophthalmology">Ophthalmology (Eye Specialist)</option>
+                        <option value="otolaryngology">Otolaryngology (ENT Specialist)</option>
+                        <option value="anesthesiology">Anesthesiology (Pain Management)</option>
+                        <option value="immunology">Immunology (Immune System Specialist)</option>
+                        <option value="pathology">Pathology (Lab Diagnosis)</option>
+                    </optgroup>
+                </select>
+                <button type="button" id="select-specialty-btn">Submit</button>
+        </div>
+    </form>
+
+
+
+    <!-- Second Form: Booking Details -->
+    <form id="booking-form" style="display:none;">
+        <label>Select Doctor:</label>
+        <select name="doctor-name" id="doctor-name" required>
+            <option value="" disabled selected>Select a Doctor</option>
+        </select><br>
+
+        <label>Select Date:</label>
+        <input type="date" id="appointment-date" required><br>
+
+        <label>Select Time:</label>
+        <input type="time" id="appointment-time" required><br>
+
+        <label>Reason for Visit:</label>
+        <textarea name="reason" id="reason" required></textarea><br>
+
+        <button type="submit">Submit Booking</button>
+    </form>
+
+    <script>
+        // Doctors data for each specialty
+        const doctorsBySpecialty = {
+            cardiology: ["Dr. John Heart"],
+            "vascular-surgery": ["Dr. Alice Vein"],
+            neurology: ["Dr. Lisa Brain"],
+            neurosurgery: ["Dr. Mark Spine"],
+            pediatrics: ["Dr. Sarah Kids"],
+            "pediatric-surgery": ["Dr. Emily Child"],
+            gynecology: ["Dr. Linda Women"],
+            obstetrics: ["Dr. Andrew Baby"],
+            dermatology: ["Dr. Susan Skin"],
+            "cosmetic-surgery": ["Dr. Peter Beauty"],
+            "general-medicine": ["Dr. Michael General"],
+            "general-surgery": ["Dr. Robert Surgery"],
+            psychiatry: ["Dr. James Mind"],
+            radiology: ["Dr. Olivia Scan"],
+            oncology: ["Dr. Emma Cancer"],
+            urology: ["Dr. William Bladder"],
+            gastroenterology: ["Dr. Sophia Digest"],
+            endocrinology: ["Dr. Charlotte Hormones"],
+            ophthalmology: ["Dr. Henry Eye"],
+            otolaryngology: ["Dr. Jacob ENT"],
+            anesthesiology: ["Dr. Elijah Anesthesia"],
+            immunology: ["Dr. Amelia Immune"],
+            pathology: ["Dr. Alexander Lab"]
+        };
+
+        // Event listener for the first form
+        document.getElementById("select-specialty-btn").addEventListener("click", function () {
+            const selectedSpecialty = document.getElementById("speciality").value;
+
+            if (!selectedSpecialty) {
+                alert("Please select a specialty!");
+                return;
+            }
+
+            // Populate the doctor dropdown
+            const doctorDropdown = document.getElementById("doctor-name");
+            doctorDropdown.innerHTML = '<option value="" disabled selected>Select a Doctor</option>';
+            if (doctorsBySpecialty[selectedSpecialty]) {
+                doctorsBySpecialty[selectedSpecialty].forEach((doctor) => {
+                    const option = document.createElement("option");
+                    option.value = doctor.toLowerCase().replace(/\s+/g, "-");
+                    option.textContent = doctor;
+                    doctorDropdown.appendChild(option);
+                });
+            }
+
+            // Show the second form
+            document.getElementById("booking-form").style.display = "block";
+        });
+
+        // Event listener for the second form submission
+        document.getElementById("booking-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            // Redirect to patient homepage
+            window.location.href = "patient.html";
+        });
+    </script>
+</body>
+</html>
